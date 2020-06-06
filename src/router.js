@@ -7,9 +7,9 @@ import addMemo from './components/addMemo';
 Vue.use(VueRouter);
 
 const routes = [
-  { path: '', redirect: '/todos'},
-  { path: '/todos', component: memoList },
-  { path: '/todos/add', component: addMemo}
+  { path: '', redirect: '/memos'},
+  { path: '/memos', component: memoList },
+  { path: '/memos/add', component: addMemo}
 ]
 
 export default new VueRouter({ routes })
