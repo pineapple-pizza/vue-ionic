@@ -11,7 +11,6 @@
 
       <ion-item>
         <ion-input :value="name" ref="newMemoItem" v-model="name" @input="updateMemoList" placeholder="Memo Name"></ion-input>
-        <!-- <ion-input v-model="name" laceholder="Memo Name"></ion-input> -->
       </ion-item>
 
       <ion-fab-button class="memo-fab" @click="addMemo()">
@@ -38,11 +37,11 @@ export default {
     addMemo() {
       const newMemo = { name: this.name, checked: false }
       db.collection("list_memos").add(newMemo)
-      .then((docRef) =>{
+      .then((docRef) => {
           this.$router.push({path: '/memos'})
           console.log("Document written with ID: ", docRef.id);
       })
-      .catch((error) =>{
+      .catch((error) => {
           console.error("Error adding document: ", error);
       });
     },
