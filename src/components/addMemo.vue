@@ -10,10 +10,10 @@
     <ion-content class="content">
 
       <ion-item>
-        <ion-input :value="name" ref="newMemoItem" @input="updateMemo" placeholder="Memo Name"></ion-input>
+        <ion-input :value="name" ref="newMemoItem" v-model="name" @input="updateMemoList" placeholder="Memo Name"></ion-input>
       </ion-item>
 
-      <ion-fab-button class="memo-fab" @click="addMemo">
+      <ion-fab-button class="memo-fab" @click="addMemo()">
         <ion-icon name="checkmark"></ion-icon>
       </ion-fab-button>
 
@@ -23,22 +23,29 @@
 
 <script>
 import axios from 'axios';
+import firebase from 'firebase/app'
+import { db } from '@/firebase'
 
 export default {
   data() {
     return {
-      name: ''
+      name: '',
+      isChecked: false
     }
   },
   methods: {
     addMemo() {
-      const newMemo = { name: this.name }
-      axios.post('http://localhost:3001/memos', newMemo)
-        .then(res => {
+      const newMemo = { name: this.name, isChecked: false }
+      db.collection("list_memos").add(newMemo)
+      .then((docRef) => {
           this.$router.push({path: '/memos'})
-        })
+          console.log("Document written with ID: ", docRef.id);
+      })
+      .catch((error) => {
+          console.error("Error adding document: ", error);
+      });
     },
-    updateMemo() {
+    updateMemoList() {
       this.name = this.$refs.newMemoItem.value
     }
   }
