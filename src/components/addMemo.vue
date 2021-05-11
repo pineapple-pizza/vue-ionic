@@ -30,12 +30,12 @@ export default {
   data() {
     return {
       name: '',
-      checked: false
+      isChecked: false
     }
   },
   methods: {
     addMemo() {
-      const newMemo = { name: this.name, checked: false }
+      const newMemo = { name: this.name, isChecked: false }
       db.collection("list_memos").add(newMemo)
       .then((docRef) => {
           this.$router.push({path: '/memos'})

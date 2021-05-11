@@ -5,7 +5,6 @@ import { firestorePlugin } from 'vuefire'
 
 import router from './router'
 
-
 Vue.use(firestorePlugin)
 
 Vue.config.ignoredElements = [/^ion-/]
